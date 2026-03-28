@@ -1,9 +1,9 @@
-aiobotocore==3.3.0
-aiohappyeyeballs==2.6.1
-aiohttp==3.13.3
-aioitertools==0.13.0
-aiosignal==1.4.0
-alabaster==1.0.0
+# aiobotocore==3.3.0
+# aiohappyeyeballs==2.6.1
+# aiohttp==3.13.3
+# aioitertools==0.13.0
+# aiosignal==1.4.0
+# alabaster==1.0.0
 # altair @ file:///croot/altair_1687526041770/work
 # anaconda-anon-usage @ file:///croot/anaconda-anon-usage_1697038922993/work
 # anaconda-catalogs @ file:///croot/anaconda-catalogs_1685727283692/work
@@ -87,7 +87,7 @@ alabaster==1.0.0
 # distributed @ file:///croot/distributed_1701398021707/work
 # distro @ file:///croot/distro_1701455004953/work
 Django==4.2.21
-djangorestframework==3.16.1
+# djangorestframework==3.16.1
 # docstring-to-markdown @ file:///work/ci_py311/docstring-to-markdown_1676851973684/work
 # docutils @ file:///work/ci_py311/docutils_1676822773036/work
 # en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
@@ -102,7 +102,7 @@ djangorestframework==3.16.1
 # frozenlist==1.8.0
 # fsspec @ file:///croot/fsspec_1701286474621/work
 # future @ file:///work/ci_py311_2/future_1679335928186/work
-# # gensim @ file:///work/ci_py311/gensim_1677033391129/work
+# gensim @ file:///work/ci_py311/gensim_1677033391129/work
 # gitdb @ file:///tmp/build/80754af9/gitdb_1617117951232/work
 # GitPython @ file:///croot/gitpython_1696936983078/work
 # gmpy2 @ file:///work/ci_py311/gmpy2_1676839849213/work
@@ -194,8 +194,7 @@ gunicorn==25.3.0
 # murmurhash==1.0.15
 # mypy @ file:///croot/mypy-split_1708366513367/work
 # mypy-extensions @ file:///croot/mypy_extensions_1695130926492/work
- mysqlclient==2.2.7
- psycopg2-binary-2.9.11
+mysqlclient==2.2.7
 # navigator-updater @ file:///croot/navigator-updater_1695210188412/work
 # nbclient @ file:///croot/nbclient_1698934205032/work
 # nbconvert @ file:///croot/nbconvert_1699022732553/work
@@ -209,7 +208,7 @@ gunicorn==25.3.0
 # numexpr @ file:///croot/numexpr_1696515281613/work
 # numpy @ file:///croot/numpy_and_numpy_base_1708638617955/work/dist/numpy-1.26.4-cp311-cp311-linux_x86_64.whl#sha256=5f96f274d410a1682519282ae769c877d32fdbf171aa8badec7bf5e1d3a1748a
 # numpydoc @ file:///work/ci_py311/numpydoc_1676845056742/work
-ollama==0.6.0
+# ollama==0.6.0
 openpyxl==3.0.10
 # overrides @ file:///croot/overrides_1699371140756/work
 # packaging==26.0
@@ -239,6 +238,7 @@ openpyxl==3.0.10
 # Protego @ file:///tmp/build/80754af9/protego_1598657180827/work
 # protobuf==3.20.3
 # psutil @ file:///work/ci_py311_2/psutil_1679337388738/work
+psycopg2-binary==2.9.11
 # ptyprocess @ file:///tmp/build/80754af9/ptyprocess_1609355006118/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
 # pure-eval @ file:///opt/conda/conda-bld/pure_eval_1646925070566/work
 # py-cpuinfo @ file:///croot/py-cpuinfo_1698068081650/work
