@@ -195,6 +195,7 @@ gunicorn==25.3.0
 # mypy @ file:///croot/mypy-split_1708366513367/work
 # mypy-extensions @ file:///croot/mypy_extensions_1695130926492/work
  mysqlclient==2.2.7
+ psycopg2-binary-2.9.11
 # navigator-updater @ file:///croot/navigator-updater_1695210188412/work
 # nbclient @ file:///croot/nbclient_1698934205032/work
 # nbconvert @ file:///croot/nbconvert_1699022732553/work
