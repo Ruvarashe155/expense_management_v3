@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Budgets - GZU{% endblock %}
+
+{% block content %}
+<div class=" mt-4">
+    <h1 class="text-center mb-4">Budgets</h1>
+    <hr class="text-success">
+
+    <!-- Add Budget Form -->
+    <form method="POST" class="row g-3">
+        {% csrf_token %}
+        <input type="hidden" name="id" id="id" value="">
+
+        <div class="col-md-3">
+            <label for="id_date" class="form-label">Start Date</label>
+            <input type="date" name="sdate" id="id_date" class="form-control" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="edate" class="form-label">End Date</label>
+            <input type="date" name="edate" id="edate" class="form-control" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="id_amount" class="form-label">Amount ($)</label>
+            <input type="number" step="0.01" min="0.00" name="amount" id="id_amount" class="form-control" placeholder="Enter budget amount" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="department" class="form-label">Department</label>
+            <select name="department" id="department" class="form-select" required>
+                <option disabled selected>- Select department -</option>
+                {% for dep in department %}
+                    <option value="{{dep.code}}">{{dep.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary me-2">Add Budget</button>
+            <button type="reset" class="btn btn-secondary">Reset/Cancel</button>
+        </div>
+    </form>
+
+    <hr class="text-success mt-4">
+
+    <!-- Existing Budgets -->
+    <h2 class="text-center mb-4">Existing Budgets</h2>
+    <div class="mb-3 text-center">
+        <button onclick="exportTableToExcel('example', 'budget-data')" class="btn btn-outline-success me-2">
+            <i class="fas fa-file-excel"></i> Export to Excel
+        </button>
+        <button onclick="exportTableToPDF('budget-data')" class="btn btn-outline-danger">
+            <i class="fas fa-file-pdf"></i> Export to PDF
+        </button>
+    </div>
+
+    <table class="table table-hover table-bordered datatable" id="example">
+        <thead class="table-dark">
+            <tr>
+                <th>Department</th>
+                <th>Amount ($)</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bud in budgets %}
+            <tr>
+                <td>{{ bud.department.name }}</td>
+                <td>{{ bud.budget_amount }}</td>
+                <td>{{ bud.start_date }}</td>
+                <td>{{ bud.end_date }}</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-primary"
+                        onclick="populateBudInfo('{{bud.id}}','{{ bud.department.code|safe }}','{{ bud.budget_amount }}','{{ bud.start_date|date:"Y-m-d"}}','{{bud.end_date|date:"Y-m-d"}}')">
+                        Edit
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function populateBudInfo(id, department, amount, start_date, end_date) {
+        document.getElementById("id").value = id;
+        document.getElementById("department").value = department;
+        document.getElementById("id_amount").value = amount;
+        document.getElementById("id_date").value = start_date;
+        document.getElementById("edate").value = end_date;
+    }
+</script>
+{% endblock %}

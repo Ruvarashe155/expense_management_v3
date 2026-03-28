@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+{% block title %}Business Assistant Bot{% endblock %}
+
+{% block content %}
+   
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            height: 100vh;
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+        }
+
+        .chat-container {
+            background: white;
+            width: 1000px;
+            max-width: 90vw;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+
+        .chat-header {
+            background: #4a90e2;
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        #chat-box {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #chat-box::-webkit-scrollbar { width: 8px; }
+        #chat-box::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        #chat-box::-webkit-scrollbar-thumb { background: #4a90e2; border-radius: 4px; }
+
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            line-height: 1.4;
+            font-size: 1rem;
+            word-wrap: break-word;
+            animation: fadeIn 0.3s ease forwards;
+            position: relative;
+        }
+
+        .timestamp {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .user-message {
+            background: #d1e7ff;
+            color: #0d3b66;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bot-message {
+            background: #f0f0f0;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        #typing-indicator {
+            font-style: italic;
+            color: #666;
+            background: #f0f0f0;
+            border-radius: 18px;
+            padding: 8px 14px;
+            margin-bottom: 10px;
+            align-self: flex-start;
+            display: none;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 0 0 10px 10px;
+            gap: 10px;
+        }
+
+        #user-input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        #user-input:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 6px rgba(74, 144, 226, 0.6);
+        }
+
+        button {
+            background: #4a90e2;
+            border: none;
+            color: white;
+            padding: 12px 22px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+
+        .quick-replies {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background: #fafafa;
+            border-top: 1px solid #ddd;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .quick-replies button {
+            background: #e0e7ff;
+            border: none;
+            color: #0d3b66;
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .quick-replies button:hover {
+            background: #c7d2fe;
+        }
+
+
+        button:hover { background: #3a78c2; }
+        button:active { background: #3465a7; }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+
+        /* Dark Theme */
+        .theme-dark {
+        background: #121212;
+        color: #f5f5f5;
+        }
+        .theme-dark .chat-container { background: #1e1e2f; color: #f5f5f5; }
+        .theme-dark .chat-header { background: #2a2a3d; color: #f5f5f5; }
+        .theme-dark .user-message { background: #2dd4bf; color: #fff; }
+        .theme-dark .bot-message { background: #2a2a3d; color: #d1d5db; }
+        .theme-dark .input-area { background: #1f1f1f; }
+        .theme-dark #user-input { background: #2a2a3d; color: #f5f5f5; border: 1px solid #444; }
+
+        /* Finance Theme */
+        .theme-green {
+        background: #f5fdf9;
+        color: #0d3b66;
+        }
+        .theme-green .chat-container { background: #ffffff; color: #0d3b66; }
+        .theme-green .chat-header { background: #2f855a; color: #ffffff; }
+        .theme-green .user-message { background: #d1fae5; color: #065f46; }
+        .theme-green .bot-message { background: #f0fdf4; color: #0d3b66; }
+        .theme-green .input-area { background: #f5fdf9; }
+        .theme-green #user-input { background: #ffffff; color: #0d3b66; border: 1px solid #2f855a; }
+
+
+            .chat-wrapper {
+        display: flex;
+        justify-content: center;   /* center horizontally */
+        padding: 40px 20px;        /* space below navbar */
+    }
+        .chat-container {
+            background: white;
+            width: 1000px;
+            max-width: 90vw;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+
+    </style>
+
+
+    <div class="chat-wrapper">
+    <div class="chat-container">
+        <div class="chat-header">Business Assistant Bot</div>
+        <div id="chat-box"></div>
+        <div id="typing-indicator">Bot is typing...</div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" aria-label="Chat input" />
+
+            <div class="quick-replies">
+                <button onclick="sendQuickMessage('Show me expenses today')">Expenses Today</button>
+                <button onclick="sendQuickMessage('Budget for March')">Budget Summary</button>
+                <button onclick="sendQuickMessage('Expense requests for my department')">My Requests</button>
+            </div>
+            <button onclick="sendMessage()" aria-label="Send message">Send</button>
+        </div>
+
+        <div>
+            <button onclick="setTheme('dark')">Dark Mode</button>
+            <button onclick="setTheme('green')">Finance Theme</button>
+            <button onclick="setTheme('')">Light Mode</button>
+        </div>
+
+    </div>
+    </div>
+
+    
+
+
+    <script>
+        function addMessage(content, type) {
+            const chatBox = document.getElementById("chat-box");
+            const msg = document.createElement("div");
+            msg.classList.add("message", type);
+            msg.innerHTML = content;
+
+            // Add timestamp
+            const timestamp = document.createElement("span");
+            timestamp.classList.add("timestamp");
+            timestamp.textContent = new Date().toLocaleTimeString();
+            msg.appendChild(timestamp);
+
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById("user-input");
+            const typingIndicator = document.getElementById("typing-indicator");
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            addMessage(message, "user-message");
+            input.value = "";
+            input.disabled = true;
+            typingIndicator.style.display = "block";
+
+            try {
+                const response = await fetch("/chatbot/chatbot/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({ message })
+                });
+
+                const data = await response.json();
+                                setTimeout(() => {
+                    typingIndicator.style.display = "none";
+                    addMessage(data.response.replace(/\n/g, "<br>"), "bot-message");
+                }, 3000); // half-second delay
+
+                // typingIndicator.style.display = "none";
+                // addMessage(data.response.replace(/\n/g, "<br>"), "bot-message");
+
+            } catch (error) {
+                typingIndicator.style.display = "none";
+                addMessage("Oops! Something went wrong. Please try again.", "bot-message");
+            } finally {
+                input.disabled = false;
+                input.focus();
+            }
+        }
+
+        document.getElementById("user-input").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+
+
+        function sendQuickMessage(text) {
+            const input = document.getElementById("user-input");
+            input.value = text;
+            sendMessage(); // reuse your existing sendMessage function
+        }
+
+
+        function setTheme(theme) {
+            // Remove any existing theme classes
+            document.body.classList.remove('theme-dark', 'theme-green');
+            
+            // Add the new theme if specified
+            if (theme) {
+                document.body.classList.add('theme-' + theme);
+            }
+            }
+
+        
+
+    </script>
+
+{% endblock %}

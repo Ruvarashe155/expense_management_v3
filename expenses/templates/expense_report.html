@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Expense Report - GZU{% endblock %}
+
+{% block content %}
+<div class=" mt-4">
+    <h2 class="text-center mb-4">Expense Report</h2>
+    <hr class="text-success">
+
+    <!-- Filter Form -->
+    <form method="get" class="row g-3 mb-4">
+        <div class="col-md-3">
+            <label class="form-label">Start Date</label>
+            <input type="date" name="start_date" value="{{ start_date }}" class="form-control">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">End Date</label>
+            <input type="date" name="end_date" value="{{ end_date }}" class="form-control">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Department</label>
+            <select name="department" class="form-select">
+                <option value="all">All</option>
+                {% for dept in departments %}
+                    <option value="{{ dept.id }}" {% if selected_department == dept.id|stringformat:"s" %}selected{% endif %}>
+                        {{ dept.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Category</label>
+            <select name="category" class="form-select">
+                <option value="all">All</option>
+                {% for cat in categories %}
+                    <option value="{{ cat.id }}" {% if selected_category == cat.id|stringformat:"s" %}selected{% endif %}>
+                        {{ cat.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
+    <hr class="text-success">
+
+    <!-- Expense Report Table -->
+    <table class="table table-hover table-bordered datatable" id="example">
+        <thead class="table-dark">
+            <tr>
+                <th>Date</th>
+                <th>Department</th>
+                <th>Category</th>
+                <th>User</th>
+                <th>Expense Name</th>
+                <th>Amount ($)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exp in expenses %}
+                {% if user.department.name == exp.department.name or user.role == "Head" or user.role == "Admin" %}
+                <tr>
+                    <td>{{ exp.date }}</td>
+                    <td>{{ exp.department.name }}</td>
+                    <td>{% if exp.category %}{{ exp.category.name }}{% else %}N/A{% endif %}</td>
+                    <td>{{ exp.user.fullname }}</td>
+                    <td>{{ exp.name }}</td>
+                    <td>${{ exp.total_amount }}</td>
+                    <td>{{ exp.status }}</td>
+                </tr>
+                {% endif %}
+            {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted">No expenses found for the selected filters.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

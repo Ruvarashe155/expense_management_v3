@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Expense Request Details{% endblock %}
+
+{% block content %}
+
+<div class=" mt-4">
+    <h2 class="mb-3">Expense Request: {{ expense_request.name }}</h2>
+    <p><strong>Total Amount:</strong> {{ expense_request.total_amount }}</p>
+    <p><strong>Status:</strong> {{ expense_request.status }}</p>
+
+    <!-- Items Table -->
+    <h3 class="mt-4">Items</h3>
+    <table class="table table-hover table-bordered datatable" id="example">
+        <thead class="table-dark">
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                {% if user.role == "Dean" or user.role == "Head" %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.description }}</td>
+                <td>{{ item.amount }}</td>
+                {% if user.role == "Dean" or user.role == "Head" %}
+                    {% if expense_request.status == "Pending" %}
+                    <td>
+                        <a href="{% url 'expenses:delete_item' item.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Add Item Form -->
+    {% if user.role == "Dean" or user.role == "Head" %}
+        {% if expense_request.status == "Pending" %}
+        <h4 class="mt-4">Add Item</h4>
+        <form method="POST" action="{% url 'expenses:add_item' expense_request.id %}" class="row g-3">
+            {% csrf_token %}
+            <div class="col-md-6">
+                <input type="text" name="description" class="form-control" placeholder="Description" required>
+            </div>
+            <div class="col-md-4">
+                <input type="number" step="0.01" name="amount" class="form-control" placeholder="Amount" required>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Add Item</button>
+            </div>
+        </form>
+        {% endif %}
+
+        <hr>
+        {% if expense_request.status == "Pending" %}
+        <div class="mt-3">
+            <a href="{% url 'expenses:approve_expense' expense_request.id %}" class="btn btn-success me-2">Approve</a>
+            <a href="{% url 'expenses:reject_expense' expense_request.id %}" class="btn btn-danger">Reject</a>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    <!-- Disbursement -->
+    {% if expense_request.status == "Approved" and user.role == "Finance" %}
+        <div class="mt-3">
+            <a href="{% url 'expenses:disburse_expense' expense_request.id %}" class="btn btn-primary">Disburse</a>
+        </div>
+    {% endif %}
+
+    <!-- Receipts -->
+    {% if expense_request.status == "Disbursed" %}
+        <h4 class="mt-4">Receipts</h4>
+        <form method="POST" enctype="multipart/form-data" action="{% url 'expenses:upload_receipt' expense_request.disbursement.id %}" class="mb-3">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="file" name="file" class="form-control" required>
+                <button type="submit" class="btn btn-secondary">Upload Receipt</button>
+            </div>
+        </form>
+
+        <ul class="list-group">
+            {% for r in expense_request.disbursement.receipts.all %}
+                <li class="list-group-item">
+                    <a href="{{ r.file.url }}" target="_blank">Receipt {{ forloop.counter }}</a>
+                    <span class="text-muted">({{ r.uploaded_at }})</span>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No receipts uploaded yet.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+{% endblock content %}

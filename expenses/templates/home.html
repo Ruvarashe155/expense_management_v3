@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .custom-card {
+        height: 200px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+
+    .custom-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .custom-card h4 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 12px;
+    }
+
+    .card-body i {
+        background: rgba(255,255,255,0.2);
+        padding: 15px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-section h2 {
+        color: #333;
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
+</style>
+
+<section class="py-5 bg-light">
+    <div class="">
+        <h2 class="text-center mb-5 fw-bold">Dashboard</h2>
+
+        <div class="dashboard-section mb-5">
+            <div class="row g-4">
+
+                {% if user.role == "Admin" %}
+                <div class="col-md-4 col-sm-6">
+                    <a href="{% url 'expenses:save_department' %}" class="text-decoration-none">
+                        <div class="card custom-card" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <div class="card-body text-center">
+                                <i class="bi bi-building fs-2"></i>
+                                <h4>Departments</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <a href="{% url 'expenses:save_category' %}" class="text-decoration-none">
+                        <div class="card custom-card" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);">
+                            <div class="card-body text-center">
+                                <i class="bi bi-tags fs-2"></i>
+                                <h4>Expense Categories</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <a href="{% url 'expenses:save_user' %}" class="text-decoration-none">
+                        <div class="card custom-card" style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">
+                            <div class="card-body text-center">
+                                <i class="bi bi-people fs-2"></i>
+                                <h4>Users</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <a href="{% url 'expenses:reports_dashboard' %}" class="text-decoration-none">
+                        <div class="card custom-card" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                            <div class="card-body text-center">
+                                <i class="bi bi-bar-chart fs-2"></i>
+                                <h4>Reports</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if user.role == "Finance" %}
+                <div class="col-md-4 col-sm-6">
+                    <a href="{% url 'expenses:save_budget' %}" class="text-decoration-none">
+                        <div class="card custom-card" style="background: linear-gradient(135deg, #f7971e, #ffd200); color:#333;">
+                            <div class="card-body text-center">
+                                <i class="bi bi-wallet2 fs-2"></i>
+                                <h4>Budgets</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+
+                <div class="col-md-4 col-sm-6">
+                    <a href="{% url 'expenses:create_expense' %}" class="text-decoration-none">
+                        <div class="card custom-card" style="background: linear-gradient(135deg, #434343, #000000);">
+                            <div class="card-body text-center">
+                                <i class="bi bi-plus-circle fs-2"></i>
+                                <h4>Create Expense</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                {% if user.role == "Staff" and user.department %}
+                <div class="col-md-4 col-sm-6">
+                    <a href="{% url 'expenses:expense_report' %}" class="text-decoration-none">
+                        <div class="card custom-card" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">
+                            <div class="card-body text-center">
+                                <i class="bi bi-list-check fs-2"></i>
+                                <h4>My Expenses</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {%endif%}
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

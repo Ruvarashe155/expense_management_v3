@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Add Expense Category - GZU{% endblock %}
+
+{% block content %}
+
+<div class=" mt-4">
+    <h1 class="text-center mb-4">Add Expense Category</h1>
+    <hr class="text-success">
+
+    <!-- Add Category Form -->
+    <form method="POST" class="row g-3">
+        {% csrf_token %}
+        <input type="hidden" name="id" id="id" value="">
+
+        <div class="col-md-6">
+            <label for="id_name" class="form-label">Category Name</label>
+            <input type="text" name="name" id="id_name" class="form-control" placeholder="Type the expense category name" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="id_description" class="form-label">Description</label>
+            <input type="text" name="description" id="id_description" class="form-control" placeholder="Type description here">
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary me-2">Add Category</button>
+            <button type="reset" class="btn btn-secondary">Reset/Cancel</button>
+        </div>
+    </form>
+
+    <hr class="text-success mt-4">
+
+    <!-- Existing Categories -->
+    <h2 class="mb-3">Existing Categories</h2>
+    <div class="mb-3">
+        <button onclick="exportTableToExcel('example', 'category-data')" class="btn btn-outline-success me-2">
+            <i class="fas fa-file-excel"></i> Export to Excel
+        </button>
+        <button onclick="exportTableToPDF('category-data')" class="btn btn-outline-danger">
+            <i class="fas fa-file-pdf"></i> Export to PDF
+        </button>
+    </div>
+
+    <table class="table table-hover table-bordered datatable" id="example">
+        <thead class="table-dark">
+            <tr>
+                <th>Expense Category Name</th>
+                <th>Description</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in category_list %}
+            <tr>
+                <td>{{ cat.name }}</td>
+                <td>{{ cat.description }}</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-primary"
+                        onclick="populateCatInfo('{{cat.id}}','{{cat.name}}','{{cat.description}}')">
+                        Edit
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function populateCatInfo(id, name, description) {
+        document.getElementById("id").value = id;
+        document.getElementById("id_name").value = name;
+        document.getElementById("id_description").value = description;
+    }
+</script>
+
+{% endblock %}

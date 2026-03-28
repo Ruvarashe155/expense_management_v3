@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<center><h2>Department Budget Report</h2></center>
+
+<div class="mb-3">
+  <button onclick="exportTableToExcel('example', 'budgetreport-data')" class="btn btn-success me-2">Export to Excel</button>
+  <button onclick="exportTableToPDF('budgetreport-data')" class="btn btn-danger">Export to PDF</button>
+</div>
+
+<table class="datatable" id="example">
+  <thead>
+    <tr>
+      <th>Department</th>
+      <th>Budget</th>
+      <th>Spent</th>
+      <th>Remaining</th>
+      <th>Period</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in report %}
+    
+    {% if user.department.name == row.department or user.role == "Head" or user.role == "Finance" or user.role == "Admin" %}
+      <tr>
+        <td>{{ row.department }}</td>
+        <td>{{ row.budget }}</td>
+        <td>{{ row.spent }}</td>
+        <td>{{ row.remaining }}</td>
+        <td>{{ row.period }}</td>
+      </tr>
+      {%endif%}
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
