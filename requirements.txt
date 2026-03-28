@@ -4,7 +4,7 @@ aiohttp==3.13.3
 aioitertools==0.13.0
 aiosignal==1.4.0
 alabaster==1.0.0
-altair @ file:///croot/altair_1687526041770/work
+# altair @ file:///croot/altair_1687526041770/work
 anaconda-anon-usage @ file:///croot/anaconda-anon-usage_1697038922993/work
 anaconda-catalogs @ file:///croot/anaconda-catalogs_1685727283692/work
 anaconda-client @ file:///croot/anaconda-client_1708640631824/work
