@@ -86,6 +86,7 @@
 # dill @ file:///croot/dill_1692271232022/work
 # distributed @ file:///croot/distributed_1701398021707/work
 # distro @ file:///croot/distro_1701455004953/work
+dj-database-url==3.1.2
 Django==4.2.21
 # djangorestframework==3.16.1
 # docstring-to-markdown @ file:///work/ci_py311/docstring-to-markdown_1676851973684/work
@@ -394,4 +395,3 @@ psycopg2-binary==2.9.11
 # zipp @ file:///croot/zipp_1704206909481/work
 # zope.interface @ file:///work/ci_py311/zope.interface_1676905896080/work
 # zstandard @ file:///work/ci_py311_2/zstandard_1679339489613/work
-dj-database-url-3.1.2
