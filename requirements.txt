@@ -102,51 +102,51 @@ djangorestframework==3.16.1
 # frozenlist==1.8.0
 # fsspec @ file:///croot/fsspec_1701286474621/work
 # future @ file:///work/ci_py311_2/future_1679335928186/work
-# gensim @ file:///work/ci_py311/gensim_1677033391129/work
-gitdb @ file:///tmp/build/80754af9/gitdb_1617117951232/work
-GitPython @ file:///croot/gitpython_1696936983078/work
-gmpy2 @ file:///work/ci_py311/gmpy2_1676839849213/work
-greenlet @ file:///croot/greenlet_1702059959679/work
+# # gensim @ file:///work/ci_py311/gensim_1677033391129/work
+# gitdb @ file:///tmp/build/80754af9/gitdb_1617117951232/work
+# GitPython @ file:///croot/gitpython_1696936983078/work
+# gmpy2 @ file:///work/ci_py311/gmpy2_1676839849213/work
+# greenlet @ file:///croot/greenlet_1702059959679/work
 gunicorn==25.3.0
-h11==0.16.0
-h5py @ file:///croot/h5py_1691589708553/work
-HeapDict @ file:///Users/ktietz/demo/mc3/conda-bld/heapdict_1630598515714/work
-holoviews @ file:///croot/holoviews_1707836454244/work
-httpcore==1.0.9
-httpx==0.28.1
-hvplot @ file:///croot/hvplot_1706712387811/work
-hyperlink @ file:///tmp/build/80754af9/hyperlink_1610130746837/work
-idna==3.11
-imagecodecs @ file:///croot/imagecodecs_1695064943445/work
-imageio @ file:///croot/imageio_1707247282708/work
-imagesize @ file:///work/ci_py311/imagesize_1676830829500/work
-imbalanced-learn @ file:///croot/imbalanced-learn_1700648238098/work
-importlib-metadata @ file:///croot/importlib_metadata-suite_1704813515092/work
-incremental @ file:///croot/incremental_1708639938299/work
-inflection==0.5.1
-iniconfig @ file:///home/linux1/recipes/ci/iniconfig_1610983019677/work
-intake @ file:///work/ci_py311_2/intake_1679336472739/work
-intervaltree @ file:///Users/ktietz/demo/mc3/conda-bld/intervaltree_1630511889664/work
-ipykernel @ file:///croot/ipykernel_1705933831282/work
-ipython @ file:///croot/ipython_1704833016303/work
-ipython-genutils @ file:///tmp/build/80754af9/ipython_genutils_1606773439826/work
-ipywidgets @ file:///croot/ipywidgets_1701289330913/work
-isort @ file:///tmp/build/80754af9/isort_1628603791788/work
-itemadapter @ file:///tmp/build/80754af9/itemadapter_1626442940632/work
-itemloaders @ file:///croot/itemloaders_1708639918324/work
-itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
-jaraco.classes @ file:///tmp/build/80754af9/jaraco.classes_1620983179379/work
-jedi @ file:///work/ci_py311_2/jedi_1679336495545/work
-jeepney @ file:///tmp/build/80754af9/jeepney_1627537048313/work
-jellyfish @ file:///croot/jellyfish_1695193535278/work
-Jinja2 @ file:///croot/jinja2_1706733616596/work
-jmespath==1.1.0
-joblib @ file:///croot/joblib_1685113087166/work
-json5 @ file:///tmp/build/80754af9/json5_1624432770122/work
-jsonpatch @ file:///tmp/build/80754af9/jsonpatch_1615747632069/work
-jsonpointer==2.1
-jsonschema @ file:///croot/jsonschema_1699041609003/work
-jsonschema-specifications @ file:///croot/jsonschema-specifications_1699032386549/work
+# h11==0.16.0
+# h5py @ file:///croot/h5py_1691589708553/work
+# HeapDict @ file:///Users/ktietz/demo/mc3/conda-bld/heapdict_1630598515714/work
+# holoviews @ file:///croot/holoviews_1707836454244/work
+# httpcore==1.0.9
+# httpx==0.28.1
+# hvplot @ file:///croot/hvplot_1706712387811/work
+# hyperlink @ file:///tmp/build/80754af9/hyperlink_1610130746837/work
+# idna==3.11
+# imagecodecs @ file:///croot/imagecodecs_1695064943445/work
+# imageio @ file:///croot/imageio_1707247282708/work
+# imagesize @ file:///work/ci_py311/imagesize_1676830829500/work
+# imbalanced-learn @ file:///croot/imbalanced-learn_1700648238098/work
+# importlib-metadata @ file:///croot/importlib_metadata-suite_1704813515092/work
+# incremental @ file:///croot/incremental_1708639938299/work
+# inflection==0.5.1
+# iniconfig @ file:///home/linux1/recipes/ci/iniconfig_1610983019677/work
+# intake @ file:///work/ci_py311_2/intake_1679336472739/work
+# intervaltree @ file:///Users/ktietz/demo/mc3/conda-bld/intervaltree_1630511889664/work
+# ipykernel @ file:///croot/ipykernel_1705933831282/work
+# ipython @ file:///croot/ipython_1704833016303/work
+# ipython-genutils @ file:///tmp/build/80754af9/ipython_genutils_1606773439826/work
+# ipywidgets @ file:///croot/ipywidgets_1701289330913/work
+# isort @ file:///tmp/build/80754af9/isort_1628603791788/work
+# itemadapter @ file:///tmp/build/80754af9/itemadapter_1626442940632/work
+# itemloaders @ file:///croot/itemloaders_1708639918324/work
+# itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
+# jaraco.classes @ file:///tmp/build/80754af9/jaraco.classes_1620983179379/work
+# jedi @ file:///work/ci_py311_2/jedi_1679336495545/work
+# jeepney @ file:///tmp/build/80754af9/jeepney_1627537048313/work
+# jellyfish @ file:///croot/jellyfish_1695193535278/work
+# Jinja2 @ file:///croot/jinja2_1706733616596/work
+# jmespath==1.1.0
+# joblib @ file:///croot/joblib_1685113087166/work
+# json5 @ file:///tmp/build/80754af9/json5_1624432770122/work
+# jsonpatch @ file:///tmp/build/80754af9/jsonpatch_1615747632069/work
+# jsonpointer==2.1
+# jsonschema @ file:///croot/jsonschema_1699041609003/work
+# jsonschema-specifications @ file:///croot/jsonschema-specifications_1699032386549/work
 # jupyter @ file:///croot/jupyter_1707947101020/work
 # jupyter-console @ file:///croot/jupyter_console_1679999630278/work
 # jupyter-events @ file:///croot/jupyter_events_1699282461638/work
