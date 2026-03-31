@@ -19,7 +19,7 @@ def create_admin_user(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("expenses", "0007_previous_migration"),  # replace with your latest migration name
+        ("expenses", "0007_customuser_username"),  # replace with your latest migration name
     ]
 
     operations = [
