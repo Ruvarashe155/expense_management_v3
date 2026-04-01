@@ -680,7 +680,7 @@ from django.conf import settings
 DB_NAME = settings.DATABASES['default']['NAME']
 DB_USER = settings.DATABASES['default']['USER']
 BACKUP_FOLDER = "backups"
-# SOCKET_PATH = settings.DATABASES['default']['OPTIONS']['unix_socket']  # Use the custom socket path
+SOCKET_PATH = settings.DATABASES['default']['OPTIONS']['unix_socket']  # Use the custom socket path
 
 os.makedirs(BACKUP_FOLDER, exist_ok=True)
 
